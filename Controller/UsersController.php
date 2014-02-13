@@ -173,9 +173,10 @@ class UsersController extends NiceAuthAppController {
 
     public function login(){
         $this->layout = 'login';
+
         if ($this->request->is('post') || ($this->request->is('get') && isset($this->request->query['openid_mode']))) {
 			if ($this->Auth->login()) {
-				$this->redirect(array('plugin' => false, 'controller' => 'devices', 'action' => 'index', 'admin' => true));
+				$this->redirect(Configure::read('NiceAuth.default.route.login'));
 				}
 			else {
 				$this->Session->setFlash(__('Invalid username or password.'), 'Flash/error');
